@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>购物车</title>
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/gouwuche.css">
+	<script src = '../js/jquery-1.10.1.min.js'></script>
+	<script src = '../js/Tissot.js'></script>
+	<!-- 模块开发 -->
+	<script src = 'js/require.js' saync = 'ture' defer
+	 data-main = 'js/main'></script>
+	<script>
+		window.onload = function(){
+			//官网推荐 下拉菜单
+			$.ajax({
+					url:"../data/menu--1.json",
+					success: function(arr){
+						for(var i = 0; i < arr.length; i++){
+							$(`<li class = 'goods_title'>
+								<div class = "goods_pic">
+									${arr[i].title}
+								</div>
+
+								<div class = 'goods_img'>
+									<img src="${arr[i].img}" alt="">
+								</div>	
+
+								<div class = 'goods_img1'>
+									<img src="${arr[i].img1}" alt="">
+								</div>
+							</li>`)
+							.appendTo($('.goods_box-')).eq(i);
+							}						
+						}
+					})		
+		});
+
+
+		//男士
+		$(function(){
+				var oB2 = document.getElementById("b2");
+				var oDesc = document.getElementById("desc1");
+
+					oB2.onmouseover = function(event){
+						var e = event || window.event;
+						oDesc.style.display = "block";
+					}
+					oB2.onmousemove = function(event){
+						var e = event || window.event;
+					}
+					oB2.onmouseout = function(){
+						//让div隐藏
+						oDesc.style.display = "none";
+					
+					}
+
+				$.ajax({
+					url:"../data/menu---2.json",
+					success: function(arr){
+						for(var i = 0; i < arr.length; i++){
+							$(`<li class = 'goods_title'>
+								<div class = "goods_pic">
+									${arr[i].title}
+								</div>
+								<div class = 'goods_img'>
+									<img src="${arr[i].img}" alt="">
+								</div>	
+							</li>`)
+							.appendTo($('.goods_box1')).eq(i);
+							}
+						
+						}
+					})
+			});
+
+			//女士
+		$(function(){
+				var oB3 = document.getElementById("b3");
+				var oDesc = document.getElementById("desc2");
+
+					oB3.onmouseover = function(event){
+						var e = event || window.event;
+						oDesc.style.display = "block";
+					}
+					oB3.onmousemove = function(event){
+						var e = event || window.event;
+					}
+					oB3.onmouseout = function(){
+						//让div隐藏
+						oDesc.style.display = "none";
+					
+					}
+
+				$.ajax({
+					url:"../data/menu---2.json",
+					success: function(arr){
+						for(var i = 0; i < arr.length; i++){
+							$(`<li class = 'goods_title'>
+								<div class = "goods_pic">
+									${arr[i].title}
+								</div>
+								<div class = 'goods_img'>
+									<img src="${arr[i].img}" alt="">
+								</div>	
+							</li>`)
+							.appendTo($('.goods_box2')).eq(i);
+							}
+						
+						}
+					})
+			});
+
+		//产品分类
+		$(function(){
+				var oB4 = document.getElementById("b4");
+				var oDesc = document.getElementById("desc3");
+
+					oB4.onmouseover = function(event){
+						var e = event || window.event;
+						oDesc.style.display = "block";
+					}
+					oB4.onmousemove = function(event){
+						var e = event || window.event;
+					}
+					oB4.onmouseout = function(){
+						//让div隐藏
+						oDesc.style.display = "none";
+					
+					}
+
+				$.ajax({
+					url:"../data/menu2.json",
+					success: function(arr){
+						for(var i = 0; i < arr.length; i++){
+							$(`<li class = 'goods_title'>
+								<div class = "goods_pic">
+									${arr[i].title}
+								</div>
+								<div class = 'goods_pic1'>
+									${arr[i].title1}
+								</div>
+								<div class = 'goods_img'>
+									<img src="${arr[i].img}" alt="">
+								</div>	
+							</li>`)
+							.appendTo($('.goods_box3')).eq(i);
+							}
+						
+						}
+					})
+			});
+
+		//场合
+		$(function(){
+				var oB5 = document.getElementById("b5");
+				var oDesc = document.getElementById("desc4");
+
+					oB5.onmouseover = function(event){
+						var e = event || window.event;
+						oDesc.style.display = "block";
+					}
+					oB5.onmousemove = function(event){
+						var e = event || window.event;
+					}
+					oB5.onmouseout = function(){
+						//让div隐藏
+						oDesc.style.display = "none";
+					
+					}
+
+				$.ajax({
+					url:"../data/menu3.json",
+					success: function(arr){
+						for(var i = 0; i < arr.length; i++){
+							$(`<li class = 'goods_title'>
+								<div class = "goods_pic">
+									${arr[i].title}
+								</div>
+								<div class = 'goods_img'>
+									<img src="${arr[i].img}" alt="">
+								</div>	
+							</li>`)
+							.appendTo($('.goods_box4')).eq(i);
+							}
+						
+						}
+					})
+			});
+
+		//功能
+		$(function(){
+				var oB6 = document.getElementById("b6");
+				var oDesc = document.getElementById("desc5");
+
+					oB6.onmouseover = function(event){
+						var e = event || window.event;
+						oDesc.style.display = "block";
+					}
+					oB6.onmousemove = function(event){
+						var e = event || window.event;
+					}
+					oB6.onmouseout = function(){
+						//让div隐藏
+						oDesc.style.display = "none";
+					
+					}
+
+				$.ajax({
+					url:"../data/menu4.json",
+					success: function(arr){
+						
+		}
+	</script>
+</head>
+<body>
+
+	<!-- header -->
+	<div id = 'header'>
+		<nav>
+			<aside>
+				<a href=""><img src="images/header3.jpg" alt=""></a>
+				<input type="text" id = 'search' value= '力洛克'>
+			</aside>
+			
+			<li>
+				<img src="images/header2.jpg" alt="">
+				<a href="Login.html"><span>我的账户</span></a>
+			</li>
+			<li>
+				<input type="button" value = '清空购物车'
+				 id = 'clear_car'>
+			</li>
+		</nav>
+	</div>
+	
+	<!-- banner -->
+	<div id = 'banner'>
+		<img src="https://www.tissotwatches.cn/skin/frontend/tissot/default/img/logo.png" alt="">
+	</div>
+	
+<!-- 	标题栏 -->
+	<div id = 'title'>
+		<nav>
+			<ul id = 'b'>
+				<a href="Tissot.html"><li>首页</li></a>
+				<a href=""><li>2分钟选表</li></a>
+				<a href="" id = 'b1'><li>官网推荐</li></a>
+				<a href="" id = 'b2'><li>男士</li></a>
+				<a href="" id = 'b3'><li>女士</li></a>
+				<a href="" id = 'b4'><li>产品分类</li></a>
+				<a href="" id = 'b5'><li>场合</li></a>
+				<a href="" id = 'b6'><li>功能</li></a>
+				<a href="" id = 'b7'><li>价格区间</li></a>
+				<a href="" id = 'b8'><li>品牌专区</li></a>
+				<a href="" id = 'b9'><li>客户服务</li></a>
+				<a href=""><li>查询实体店铺</li></a>
+			</ul>
+		</nav>
+		<nav id = 'desc'>
+			<ul class = 'goods_box-'></ul>
+		</nav>
+		<nav id = 'desc1'>
+			<ul class = 'goods_box1'></ul>
+		</nav>
+		<nav id = 'desc2'>
+			<ul class = 'goods_box2'></ul>
+		</nav>
+		<nav id = 'desc3'>
+			<ul class = 'goods_box3'></ul>
+		</nav>
+		<nav id = 'desc4'>
+			<ul class = 'goods_box4'></ul>
+		</nav>
+		<nav id = 'desc5'>
+			<ul class = 'goods_box5'></ul>
+		</nav>
+		<nav id = 'desc6'>
+			<ul class = 'goods_box6'></ul>
+		</nav>
+		<nav id = 'desc7'>
+			<ul class = 'goods_box7'></ul>
+		</nav>
+		<nav id = 'desc8'>
+			<ul class = 'goods_box8'></ul>
+		</nav>
+	</div>
+	
+	<!-- 一个小栏 -->
+	<div id = 'one'>
+		<nav id = 'one_'>
+			<ul>
+				<a href="Tissot.html"><li id = 'a1'>首页</li></a>
+				<a href=""><li id = 'a1'>/天梭俊雅系列手表</li></a>
+			</ul>
+		</nav>
+	</div>
+	
+	<!-- 筛选列表 -->
+	<div id = 'select'>
+		<nav id = 'select_'>
+			<aside>
+				<ul>
+					<li class = 'list'>筛选列表</li>
+					<li>
+						<select name="" id="from">
+							<option value="">自定义筛选</option>
+							<option value="">男士-复古</option>
+							<option value="">男士-绅士</option>
+							<option value="">男士-时尚</option>
+							<option value="">男士-运动</option>
+							<option value="">男士-华丽</option>
+						</select>
+					</li>
+					<li class = 'biao'>
+						<img src="images/shoubiao.jpg" alt="">
+						<span>两分钟为您选表</span>
+					</li>
+				</ul>
+			</aside>
+		</nav>
+	</div>
+	
+	<!-- 购物车 -->
+	<!-- 商品列表 -->
+	<div id = 'goods_'>
+		<nav class="goods_box">
+			<ul>
+				
+
+			</ul>
+		</nav>
+	</div>
+
+<!-- 右边购物车 -->
+	<div class="sc_right">
+		<div class="sc_pic">
+			<!-- 购物车内商品的数量 -->
+			<div class="sc_num">
+				0
+			</div>
+		</div>
+
+		<ul>
+			
+		</ul>
+	</div>
+	<div id = 'ball'></div>
+	<!-- 关注我们 -->
+	<div id = 'us'>
+		<nav>
+			<aside>
+				<ul>
+					<a href=""  id = 'first'><li>系列</li></a>
+					<a href=""><li>经典系列</li></a>
+					<a href=""><li>时尚系列</li></a>
+					<a href=""><li>触屏系列</li></a>
+					<a href=""><li>怀旧经典系列</li></a>
+					<a href=""><li>特别款系列</li></a>
+					<a href=""><li>运动款系列</li></a>
+				</ul>
+			</aside>
+			<aside>
+				<ul>
+					<a href=""  id = 'first'><li>相关条款</li></a>
+					<a href=""><li>使用条款</li></a>
+					<a href=""><li>销售条件</li></a>
+					<a href=""><li>发货和退货</li></a>
+					<a href=""><li>隐私和COOKIES政策</li></a>
+				</ul>
+			</aside>
+			<aside>
+				<ul>
+					<a href=""  id = 'first'><li>客户服务</li></a>
+					<a href=""><li>腕表保养</li></a>
+					<a href=""><li>质保与用户手册</li></a>
+					<a href=""><li>发货和退货</li></a>
+					<a href=""><li>隐私和COOKIES政策</li></a>
+				</ul>
+			</aside>
+			<aside>
+				<ul>
+					<a href="" id = 'first'><li>在线商城帮助</li></a>
+					<a href=""><li>
+						<img src="images/end1.jpg" alt="">
+						<li id = 'black'>&nbsp; &nbsp;Live800在线销售咨询</li>
+						<li id = 'gray'> &nbsp; &nbsp;立即联系></li>
+					</li></a>
+					<a href=""><li>
+						<img src="images/end2.jpg" alt="">
+						<li id = 'black'> &nbsp; &nbsp;线下实体店销售热线</li>
+						<li id = 'black'> &nbsp; &nbsp;400-670-1853</li>
+						<li id = 'gray'> &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;周一至周五9:00--17:30</li>
+					</li></a>
+				</ul>
+			</aside>
+			<aside>
+				<ul>
+					<li>关注我们</li>
+					<li>
+						<img src="images/end3.jpg" alt="">
+						<img src="images/end4.jpg" alt="">
+						<img src="images/end5.jpg" alt="">
+					</li>
+					<li>售后服务</li>
+					<li>
+						<img src="images/end3.jpg" alt="">
+					</li>
+				</ul>
+			</aside>
+		</nav>
+	</div>
+
+	<!-- 查看营业执照 -->
+	<div id = 'yingye'>
+		<nav>
+			<div>
+				<img src="https://www.tissotwatches.cn/skin/frontend/tissot/default/img/logo-footer.png" alt="">
+			</div>
+			<div>
+				<a href=""><span>查看营业执照</span></a>
+			</div>
+			<div>
+				<li>瑞士制造</li>
+				<li>官方保修</li>
+				<li>轻松退换</li>
+				<li>信息安全</li>
+			</div>
+		</nav>
+	</div>
+</body>
+</html>

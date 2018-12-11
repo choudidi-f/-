@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/fangdajing.css">
+	<link rel="stylesheet" href="css/reset.css">
+	<script src = 'js/jquery-1.11.3.js'></script>
+	<script src = 'js/Tissot.js'></script>
+	<script src = 'js/ajax.js'></script>
+	<script>
+	
+	   //页面加载完毕后执行
+	       window.onload = function (){
+				var pic_div = document.getElementById('full-pic');//拿到整个大的div
+				var normal_pic = pic_div.getElementsByTagName('img')[0];//拿到div中的图片
+				var span_move = document.getElementById('pic-span');//拿到显示当前图片位置的span
+				var big_div = document.getElementById('big-box');//拿到右边放置放大图片的div
+				var pic_move = big_div.getElementsByTagName('img')[0];//拿到右侧放大的图片本身
+				//当鼠标在最外层div中滑动的时候触发事件，因为要获取当前的鼠标位置所以要拿到事件源evt
+				pic_div.onmousemove = function (evt) {
+				    // 获取事件
+				    var e = evt || window.event;
+				    var bigSize = pic_move.offsetHeight;
+	    			var littleSize = normal_pic.offsetHeight;
+	    			var n = bigSize / littleSize;
+	    			//获取pic对于页面的绝对位置
+	    			var pic_x = normal_pic.getBoundingClientRect().left;
+	    			var pic_y = normal_pic.getBoundingClientRect().top + document.documentElement.scrollTop;
+					// 获取鼠标相对full-pic的位置
+	    			var mouse_x = e.pageX - pic_x;
+	    			var mouse_y = e.pageY - pic_y;
+	    			big_div.style.display = 'block';
+	    			span_move.style.display = 'block';
+	    			span_move.style.width = normal_pic.offsetWidth / 2 + 'px';
+					span_move.style.height = normal_pic.offsetWidth / 2 + 'px';
+					if (mouse_x <= span_move.offsetWidth / 2) {
+	        		//在最左侧不发生移动的情况
+	        		pic_move.style.left = '0px';//右边大图位置为0px
+	        		span_move.style.left = normal_pic.offsetLeft + 'px';//	span始终和图片左端对齐
+	    			} else if (mouse_x > span_move.offsetWidth/ 2 && mouse_x < normal_pic.offsetWidth - span_move.offsetWidth / 2) {
+						var tempX = mouse_x - span_move.offsetWidth / 2;
+	
+						pic_move.style.left = - n * (tempX) + 'px';//控制右侧大图的移动
+						span_move.style.left = tempX + normal_pic.offsetLeft + 'px';
+						//控制span位置的移动
+					} else {
+	            //当移动到最右端的时候，停止span的移动，大图也移动到相应的最右端，此时可以通过一个n来控制大图的移动了
+	            		pic_move.style.left = - n * (normal_pic.offsetWidth - span_move.offsetWidth) + 'px';
+	            		span_move.style.left = normal_pic.offsetLeft + normal_pic.offsetWidth - span_move.offsetWidth + 'px';
+	        		}
+				
+					if (mouse_y <= span_move.offsetWidth / 2) {
+					        pic_move.style.top = '0px';
+					        span_move.style.top = '0px';
+					    } else if (mouse_y > span_move.offsetHeight / 2 && mouse_y < normal_pic.offsetHeight - span_move.offsetHeight /2) {
+					        var tempY = mouse_y - span_move.offsetHeight / 2;
+					        pic_move.style.top = - n * tempY + 'px';
+					        span_move.style.top = tempY + 'px';
+					    } else {
+					        pic_move.style.top = -(n - 1) * normal_pic.offsetHeight + 'px';
+					        span_move.style.top = normal_pic.offsetHeight - span_move.offsetHeight + 'px';
+					    }
+					 
+					 
+					}
+					 	 
+					pic_div.onmouseout = function () {
+					    span_move.style.display = 'none';
+					    big_div.style.display = 'none';
+					}
+	
+	
+	       	}
+
+	       	//下拉菜单
+	       	
+	     </script>
+</head>
+<body>
+	<!-- header-->
+	<div id = 'header'>
+
+		<nav>
+			<aside>
+				<a href=""><img src="images/header3.jpg" alt=""></a>
+				<input type="text" id = 'search' value= '力洛克'>
+			</aside>
+			
+			<li>
+				<img src="images/header2.jpg" alt="">
+				<a href="Login.html"><span>我的账户</span></a>
+			</li>
+			<a href="" id = 'car'><li>
+				<img src="images/header1.jpg" alt="">
+				<span>购物车</span>
+				<span>0</span>
+			</li></a>
+		</nav>
+	</div>
+	
+	<!-- banner -->
+	<div id = 'banner'>
+		<img src="https://www.tissotwatches.cn/skin/frontend/tissot/default/img/logo.png" alt="">
+	</div>
+
+	<!-- 标题栏 -->
+	<div id = 'title'>
+		<nav>
+			<ul id = 'b'>
+				<a href="Tissot.html"><li>首页</li></a>
+				<a href=""><li>2分钟选表</li></a>
+				<a href="" id = 'b1'><li>官网推荐</li></a>
+				<a href="" id = 'b2'><li>男士</li></a>
+				<a href="" id = 'b3'><li>女士</li></a>
+				<a href="" id = 'b4'><li>产品分类</li></a>
+				<a href="" id = 'b5'><li>场合</li></a>
+				<a href="" id = 'b6'><li>功能</li></a>
+				<a href="" id = 'b7'><li>价格区间</li></a>
+				<a href="" id = 'b8'><li>品牌专区</li></a>
+				<a href="" id = 'b9'><li>客户服务</li></a>
+				<a href=""><li>查询实体店铺</li></a>
+			</ul>
+		</nav>
+		<nav id = 'desc'>
+			<ul class = 'goods_box-'></ul>
+		</nav>
+		<nav id = 'desc1'>
+			<ul class = 'goods_box1'></ul>
+		</nav>
+		<nav id = 'desc2'>
+			<ul class = 'goods_box2'></ul>
+		</nav>
+		<nav id = 'desc3'>
+			<ul class = 'goods_box3'></ul>
+		</nav>
+		<nav id = 'desc4'>
+			<ul class = 'goods_box4'></ul>
+		</nav>
+		<nav id = 'desc5'>
+			<ul class = 'goods_box5'></ul>
+		</nav>
+		<nav id = 'desc6'>
+			<ul class = 'goods_box6'></ul>
+		</nav>
+		<nav id = 'desc7'>
+			<ul class = 'goods_box7'></ul>
+		</nav>
+		<nav id = 'desc8'>
+			<ul class = 'goods_box8'></ul>
+		</nav>
+	</div>
+
+	<!-- 一个小栏 -->
+	<div id = 'one'>
+		<nav id = 'one_'>
+			<ul>
+				<li>首页</li>
+				<a href=""><li id = 'a1'>/天梭俊雅系列手表</li></a>
+				<li>/天梭俊雅系列皮带石英男表</li>
+			</ul>
+		</nav>
+	</div>
+
+	<!-- 实物图 -->
+	<div id = 'goods'>
+		<nav id = 'goods_'>	
+			<div id = 'full-pic'>
+				<aside id = 'img'>
+					<span id="pic-span"></span>
+					<img src="https://www.tissotwatches.cn/media/catalog/product/cache/1/image/460x/9df78eab33525d08d6e5fb8d27136e95/t/0/t0064071603300_1.png" alt="">	
+				</aside>
+				<div id = 'big-box'>
+					<img src="https://www.tissotwatches.cn/media/catalog/product/cache/1/image/460x/9df78eab33525d08d6e5fb8d27136e95/t/0/t0064071603300_1.png" alt="">
+				</div>
+			</div>
+				
+
+			<aside id = 'information'>
+				<ul>
+					<li><span>Tissot</span>俊雅系列皮带石英男表</li>
+					<li>T06098020845</li>
+					<li>￥&nbsp;2,20000</li>
+					<li>每月分期最低约￥197.07</li>
+					<li><span>数量：</span><span>1</span><button>加入购物车</button><button id = 'buy'>立即购买</button></li>
+					<li><img src="../images/kefu.jpg" alt=""><span>联系客服,</span><span>下单送好礼</span><img src="../images/liwu.jpg" alt=""></li>
+				</ul>
+			</aside>
+		</nav>
+	</div>
+
+	<!-- 放大效果 -->
+
+	<!-- 详细信息 -->
+	<div class="product-technical-specs">
+        <div class="container">
+            <h3 class="xs-content-dropdown xs-content-dropdown-open">技术规格</h3>
+         <div class="content clearfix">
+                <div class="technical-list-left col-xs-12 col-md-6">
+                    <ul>
+                        <li class="clearfix">
+                            <label>型号</label>
+                            <span>T0064071603300</span>
+                        </li>
+                         <li class="clearfix">
+                            <label>系列</label>
+                            <span>经典系列</span>
+                        </li>
+                        <li class="clearfix">
+                            <label>性别</label>
+                            <span>男士腕表</span>
+                        </li>
+						<li class="clearfix">
+                            <label>表壳形状</label>
+                            <span>圆形</span>
+                        </li>
+						<li class="clearfix">
+                            <label>防水性能</label>
+                            <span>防水性能可抵御相当于3巴的压力（30米/100英尺）</span>
+                        </li>
+                        <li class="clearfix">
+                            <label>表壳材质</label>
+                            <span>316L精钢表壳</span>
+                        </li>
+                        <li class="clearfix">
+                            <label>表盘长度(mm)</label>
+                            <span>39.3</span>
+                        </li>
+                        <li class="clearfix">
+                            <label>表盘宽度(mm)</label>
+                            <span>39.3</span>
+                        </li>
+                        <li class="clearfix">
+                            <label>表耳宽度(mm)</label>
+                            <span>19</span>
+                        </li>
+                        <li class="clearfix">
+                            <label>表盘厚度(mm)</label>
+                            <span>9.75</span>
+                        </li>
+                        <li class="clearfix">
+                            <label>表壳后盖</label>
+                            <span>透明表后盖</span>
+                        </li>
+                        <li class="clearfix">
+                            <label>重量(g)</label>
+                            <span>68</span>
+                        </li>
+                        <li class="clearfix">
+                            <label>表蒙材质</label>
+                            <span>抗刮伤蓝宝石玻璃表镜                            </span>
+                        </li>
+                        <li class="clearfix">
+                            <label>表盘颜色</label>
+                            <span>银色</span>
+                        </li>
+                        <li class="clearfix">
+                            <label>刻度</label>
+                            <span>罗马数字</span>
+                        </li>
+                </div>
+                <div class="technical-list-right col-xs-12 col-md-6">
+                    <ul>
+                        <li class="clearfix">
+                            <label>机芯</label>
+                            <span>瑞士制造自动上弦机械机芯</span>
+                        </li>
+                        <li class="clearfix">
+                            <label>机芯型号</label>
+                            <span>POWERMATIC 80.111</span>
+                        </li>
+                        <li class="clearfix">
+                            <label>表盘</label>
+                            <span>时、分、秒、日期显示</span>
+                        </li>
+                        <li>
+                            <label>动力存储</label>
+                            <span>80小时动力存储</span>
+                        </li>
+                        <li class="clearfix">
+                            <label>腕带参考编号</label>
+                            <span>T600013405</span>
+                        </li>
+                        <li class="clearfix">
+                            <label>表带</label>
+                            <span>皮质表带</span>
+                        </li>
+                        <li class="clearfix">
+                            <label>腕带颜色</label>
+                            <span>黑色</span>
+                        </li>
+                        <li class="clearfix">
+                            <label>表扣</label>
+                            <span>蝴蝶扣</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+	
+
+	<!-- 关注我们 -->
+	<div id = 'us'>
+		<nav>
+			<aside>
+				<ul>
+					<a href=""  id = 'first'><li>系列</li></a>
+					<a href=""><li>经典系列</li></a>
+					<a href=""><li>时尚系列</li></a>
+					<a href=""><li>触屏系列</li></a>
+					<a href=""><li>怀旧经典系列</li></a>
+					<a href=""><li>特别款系列</li></a>
+					<a href=""><li>运动款系列</li></a>
+				</ul>
+			</aside>
+			<aside>
+				<ul>
+					<a href=""  id = 'first'><li>相关条款</li></a>
+					<a href=""><li>使用条款</li></a>
+					<a href=""><li>销售条件</li></a>
+					<a href=""><li>发货和退货</li></a>
+					<a href=""><li>隐私和COOKIES政策</li></a>
+				</ul>
+			</aside>
+			<aside>
+				<ul>
+					<a href=""  id = 'first'><li>客户服务</li></a>
+					<a href=""><li>腕表保养</li></a>
+					<a href=""><li>质保与用户手册</li></a>
+					<a href=""><li>发货和退货</li></a>
+					<a href=""><li>隐私和COOKIES政策</li></a>
+				</ul>
+			</aside>
+			<aside>
+				<ul>
+					<a href="" id = 'first'><li>在线商城帮助</li></a>
+					<a href=""><li>
+						<img src="../images/end1.jpg" alt="">
+						<li id = 'black'>&nbsp; &nbsp;Live800在线销售咨询</li>
+						<li id = 'gray'> &nbsp; &nbsp;立即联系></li>
+					</li></a>
+					<a href=""><li>
+						<img src="../images/end2.jpg" alt="">
+						<li id = 'black'> &nbsp; &nbsp;线下实体店销售热线</li>
+						<li id = 'black'> &nbsp; &nbsp;400-670-1853</li>
+						<li id = 'gray'> &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;周一至周五9:00--17:30</li>
+					</li></a>
+				</ul>
+			</aside>
+			<aside>
+				<ul>
+					<li>关注我们</li>
+					<li>
+						<img src="../images/end3.jpg" alt="">
+						<img src="../images/end4.jpg" alt="">
+						<img src="../images/end5.jpg" alt="">
+					</li>
+					<li>售后服务</li>
+					<li>
+						<img src="../images/end3.jpg" alt="">
+					</li>
+				</ul>
+			</aside>
+		</nav>
+	</div>
+
+	<!-- 查看营业执照 -->
+	<div id = 'yingye'>
+		<nav>
+			<div>
+				<img src="https://www.tissotwatches.cn/skin/frontend/tissot/default/img/logo-footer.png" alt="">
+			</div>
+			<div>
+				<a href=""><span>查看营业执照</span></a>
+			</div>
+			<div>
+				<li>瑞士制造</li>
+				<li>官方保修</li>
+				<li>轻松退换</li>
+				<li>信息安全</li>
+			</div>
+		</nav>
+	</div>
+</body>
+</html>

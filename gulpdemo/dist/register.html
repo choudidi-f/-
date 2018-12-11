@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>创建新客户账户</title>
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/register.css">
+	<script src = 'js/jquery-1.11.3.js'></script>
+	<script src = 'js/Tissot.js'></script>
+	<script src = 'js/ajax.js'></script>
+	<script src = 'js/menu.js'></script>
+	<script>
+			window.onload = function(){
+				var oDiv = document.getElementById("div1");
+				var aBtns = oDiv.getElementsByTagName('button');
+				var aDivs = oDiv.getElementsByTagName("div");
+
+				//通过循环给按钮添加点击
+
+				for(var i = 0; i < aBtns.length; i++){
+					aBtns[i].index = i;
+					aBtns[i].onclick = function(){
+
+						//先将所有按钮的被选中状态都取消
+						for(var j = 0; j < aBtns.length; j++){
+							aBtns[j].className = '';
+							aDivs[j].style.display = "none";
+						}
+
+						//this是当前点击的按钮
+						this.className = "active";
+						// console.log(this.index);
+						aDivs[this.index].style.display = 'block';
+						
+					}
+				}
+
+				//注册
+				var oBtn2 = document.getElementById('regi');
+					var oUser = document.getElementById('username');
+					var oPass = document.getElementById('password');
+					oBtn2.onclick = function(){
+				var str = `username=${oUser.value}&password=${oPass.value}`;
+				ajax({
+						method:'post',
+						url:'../scripts/register.php',
+						data:str,
+						success:function(data){
+							alert(data);
+						},
+							error:function(msg){
+							alert(msg);
+						}
+
+						})
+					}
+
+				//注册
+				function func(){
+					var oValue = $('username').value;
+					oValue = oValue.replace(/ /g, '');
+					if(oValue.length < 8 || oValue.length > 16){
+						$('span_2').innerHTML = '长度应为6~18个字符';
+						$('span_2').style.color = 'red';
+
+					}else if(/\d/g.test(oValue[0])){
+						$('span_2').innerHTML = '邮件地址必须以英文字母开头';
+						$('span_2').style.color = 'red';
+
+					}else if(/\W/.test(oValue)){
+						$('span_2').innerHTML = '邮件地址必须以数字，字母或者下划线组成';
+						$('span_2').style.color = 'red';
+
+					}else{
+						$('span_2').innerHTML = '输入正确';
+						$('span_2').style.color = 'green';
+					} 
+					
+				}	
+
+				//密码
+				function func1(){
+					var oValue1 = $('password').value;
+					if(oValue1.length < 6){
+						$('span_3').innerHTML = '长度至少为六位';
+						$('span_3').style.color = 'red';
+					}else if(/^\d+$/g.test(oValue1)){
+						$('span_3').innerHTML = '密码最好由字母和数字共同组成';
+						$('span_3').style.color = 'red';
+					}else{
+						$('span_3').innerHTML = '输入正确';
+						$('span_3').style.color = 'green';
+					}
+
+				}
+
+				//确认密码
+				/*function func2(){
+					var oValue2 = $('password1').value;
+					var oValue1 = $('password').value;
+					if(oValue2 == oValue1){
+						$('span_4').innerHTML = '输入正确';
+						$('span_4').style.color = 'green';
+					}else{
+						$('span_4').innerHTML = '请重新输入';
+						$('span_4').style.color = 'red';
+					}
+				}*/
+
+
+				//地址函数
+				function $(id){
+					return document.getElementById(id);
+				}
+
+				//注册
+				
+			}
+	</script>
+</head>
+<body>
+	<!-- header-->
+	<div id = 'header'>
+		<nav>
+			<aside>
+				<a href=""><img src="images/header3.jpg" alt=""></a>
+				<input type="text" id = 'search' value= '力洛克'>
+			</aside>
+			
+			<li>
+				<img src="images/header2.jpg" alt="">
+				<a href="Login.html"><span>我的账户</span></a>
+			</li>
+			<a href="" id = 'car'><li>
+				<img src="images/header1.jpg" alt="">
+				<span>购物车</span>
+				<span>0</span>
+			</li></a>
+		</nav>
+	</div>
+	
+	<!-- banner -->
+	<div id = 'banner'>
+		<img src="https://www.tissotwatches.cn/skin/frontend/tissot/default/img/logo.png" alt="">
+	</div>
+
+	<!-- 标题栏 -->
+	<div id = 'title'>
+		<nav>
+			<ul id = 'b'>
+				<a href="Tissot.html"><li>首页</li></a>
+				<a href=""><li>2分钟选表</li></a>
+				<a href="" id = 'b1'><li>官网推荐</li></a>
+				<a href="" id = 'b2'><li>男士</li></a>
+				<a href="" id = 'b3'><li>女士</li></a>
+				<a href="" id = 'b4'><li>产品分类</li></a>
+				<a href="" id = 'b5'><li>场合</li></a>
+				<a href="" id = 'b6'><li>功能</li></a>
+				<a href="" id = 'b7'><li>价格区间</li></a>
+				<a href="" id = 'b8'><li>品牌专区</li></a>
+				<a href="" id = 'b9'><li>客户服务</li></a>
+				<a href=""><li>查询实体店铺</li></a>
+			</ul>
+		</nav>
+		<nav id = 'desc'>
+			<ul class = 'goods_box-'></ul>
+		</nav>
+		<nav id = 'desc1'>
+			<ul class = 'goods_box1'></ul>
+		</nav>
+		<nav id = 'desc2'>
+			<ul class = 'goods_box2'></ul>
+		</nav>
+		<nav id = 'desc3'>
+			<ul class = 'goods_box3'></ul>
+		</nav>
+		<nav id = 'desc4'>
+			<ul class = 'goods_box4'></ul>
+		</nav>
+		<nav id = 'desc5'>
+			<ul class = 'goods_box5'></ul>
+		</nav>
+		<nav id = 'desc6'>
+			<ul class = 'goods_box6'></ul>
+		</nav>
+		<nav id = 'desc7'>
+			<ul class = 'goods_box7'></ul>
+		</nav>
+		<nav id = 'desc8'>
+			<ul class = 'goods_box8'></ul>
+		</nav>
+	</div>
+
+
+	<!-- 用户登陆 -->
+	<div id = 'register'>
+		<nav></nav>
+		<nav>
+			<aside>
+				<span id = 'register_username'>用户登录</span>
+				<span id = 'had'>如果您已经有天梭账户，请登录</span>
+				<a href="Login.html"><button id = 'register_'>登陆</button></a><br>
+				<span id = 'join'>合作站账号登陆</span>
+				<ul>
+					<li><img src = 'https://www.tissotwatches.cn/skin/frontend/tissot/default/tissot/images/frontendlogin/weibo.png'></li>
+					<li><img src = 'https://www.tissotwatches.cn/skin/frontend/tissot/default/tissot/images/frontendlogin/qq.png'></li>
+					<li><img src = 'https://www.tissotwatches.cn/skin/frontend/tissot/default/tissot/images/frontendlogin/weixin.png'></li>
+				</ul>
+			</aside>
+			<aside>
+				<span id = 'create_account'>创建一个账户</span>
+				<span id = 'bring'>通过加入天梭，能为您带来：</span>
+				<ul>
+					<li>&nbsp;<span>></span>更快速结账过程</li>
+					<li>&nbsp;<span>></span>拥有多个送货地址</li>
+					<li>&nbsp;<span>></span>全程跟踪您的订单状态</li>
+				</ul>
+				<nav id = 'div1'>
+					<button id ='iphone' class = 'active'>手机号码注册</button>
+					<button id = 'emil'>电子邮箱注册</button>
+					<!-- 手机注册 -->
+					<div id = 'iphone_' style = 'display: block'>
+						<!-- 姓名 -->
+						<section class = 'i1'>
+							<span id = 'name'>姓名&nbsp;&nbsp;*&nbsp;&nbsp;</span>
+							<input onblur = 'func();' id = 'username' type="text" name = 'username'>
+						</section>
+						<!-- 称呼 -->
+						<section class = 'i2'>
+							<span id = 'name_'>称呼&nbsp;&nbsp;*&nbsp;&nbsp;</span>
+							<select name="sex" id="sex">
+								<option value="">&nbsp;</option>
+								<option value="">先生</option>
+								<option value="">女士</option>
+							</select>
+						</section>
+						<!-- 年龄 -->
+						<section class = 'i3'>
+							<span id = 'name_'>出生日期&nbsp;&nbsp;</span>
+							<select name="year" id="year">
+								<option value="">年</option>
+								<option value="">1998</option>
+								<option value="">1997</option>
+							</select>
+							<select name="mouth" id="mouth">
+								<option value="">月</option>
+								<option value="">12月</option>
+								<option value="">11月</option>
+								<option value="">10月</option>
+								<option value="">09月</option>
+								<option value="">08月</option>
+								<option value="">07月</option>
+								<option value="">06月</option>
+								<option value="">05月</option>
+								<option value="">04月</option>
+								<option value="">03月</option>
+								<option value="">02月</option>
+								<option value="">01月</option>
+							</select>
+							<select name="days" id="days">
+								<option value="">日</option>
+								<option value="">30</option>
+								<option value="">29</option>
+								<option value="">28</option>
+								<option value="">27</option>
+								<option value="">26</option>
+								<option value="">25</option>
+								<option value="">24</option>
+								<option value="">23</option>
+								<option value="">22</option>
+								<option value="">21</option>
+								<option value="">20</option>
+								<option value="">19</option>
+								<option value="">18</option>
+								<option value="">17</option>
+								<option value="">16</option>
+								<option value="">15</option>
+								<option value="">14</option>
+								<option value="">13</option>
+								<option value="">12</option>
+								<option value="">11</option>
+								<option value="">10</option>
+								<option value="">09</option>
+							</select>
+						</section>
+						<!-- 手机号码 -->
+						<section class="i4">
+							<span id = 'number_'>手机号码&nbsp;&nbsp;*&nbsp;&nbsp;</span>
+							<input type="text" id = 'number' name = 'number'>
+							<input type="button" value = '发送验证码' id = 'y1'>
+						</section>
+						<!-- 验证码 -->
+						<section class="i5">
+							<span id = 'code_'>验证码&nbsp;&nbsp;*&nbsp;&nbsp;</span>
+							<input type="text" id = 'code' name = 'code'>
+						</section>
+						<!-- 登录密码 -->
+						<section class="i6">
+							<span id = 'password_'>登陆密码&nbsp;&nbsp;*&nbsp;&nbsp;</span>
+							<input onblur = 'func1();' type="text" id = 'password' name = 'password'>
+						</section>
+						<!-- 确认登陆密码 -->
+						<section class="i7">
+							<span id = 'password-1'>确认密码&nbsp;&nbsp;*&nbsp;&nbsp;</span>
+							<input onblur = 'func2();'  type="text" id = 'password-1' name = 'password-1'>
+						</section>
+						<!--  必选项-->
+						<section class = 'i8'>
+							<span id = 'must'>*为必选项</span>
+						</section>
+						<!-- 条款项 -->
+						<section class = 'i9'>	
+							<input type=radio id = 'rad'>
+							<span id = 'read'>我已阅读并同意</span>
+							<span id = 'read-'>《天梭账户注册协议》、《销售条件》、《发货和退货协议》、</span><span id = 'read'>和</span><span id = 'read-'>《隐私和cookie政策》</span>
+						</section>
+						<!-- 注册按钮 -->
+						<section class = 'i10'>
+							<input type="button" value = '注册' id = 'regi'>
+						</section>
+					</div>
+					<!-- 电子邮箱注册 -->
+					<div id = 'emil_'>
+						<!-- 姓名 -->
+						<section class = 'i1'>
+							<span id = 'name'>姓名&nbsp;&nbsp;*&nbsp;&nbsp;</span>
+							<input id = 'username' type="text" name = 'username'>
+						</section>
+						<!-- 称呼 -->
+						<section class = 'i2'>
+							<span id = 'name_'>称呼&nbsp;&nbsp;*&nbsp;&nbsp;</span>
+							<select name="sex" id="sex">
+								<option value="">&nbsp;</option>
+								<option value="">先生</option>
+								<option value="">女士</option>
+							</select>
+						</section>
+						<!-- 年龄 -->
+						<section class = 'i3'>
+							<span id = 'name_'>出生日期&nbsp;&nbsp;</span>
+							<select name="year" id="year">
+								<option value="">年</option>
+								<option value="">1998</option>
+								<option value="">1997</option>
+							</select>
+							<select name="mouth" id="mouth">
+								<option value="">月</option>
+								<option value="">12月</option>
+								<option value="">11月</option>
+								<option value="">10月</option>
+								<option value="">09月</option>
+								<option value="">08月</option>
+								<option value="">07月</option>
+								<option value="">06月</option>
+								<option value="">05月</option>
+								<option value="">04月</option>
+								<option value="">03月</option>
+								<option value="">02月</option>
+								<option value="">01月</option>
+							</select>
+							<select name="days" id="days">
+								<option value="">日</option>
+								<option value="">30</option>
+								<option value="">29</option>
+								<option value="">28</option>
+								<option value="">27</option>
+								<option value="">26</option>
+								<option value="">25</option>
+								<option value="">24</option>
+								<option value="">23</option>
+								<option value="">22</option>
+								<option value="">21</option>
+								<option value="">20</option>
+								<option value="">19</option>
+								<option value="">18</option>
+								<option value="">17</option>
+								<option value="">16</option>
+								<option value="">15</option>
+								<option value="">14</option>
+								<option value="">13</option>
+								<option value="">12</option>
+								<option value="">11</option>
+								<option value="">10</option>
+								<option value="">09</option>
+								<option value="">08</option>
+								<option value="">07</option>
+								<option value="">06</option>
+								<option value="">05</option>
+								<option value="">04</option>
+								<option value="">03</option>
+								<option value="">02</option>
+								<option value="">01</option>
+							</select>
+						</section>
+						<!-- 电子邮箱地址 -->
+						<section class="i4">
+							<span id = 'number_'>电子邮箱&nbsp;&nbsp;*&nbsp;&nbsp;</span>
+							<input type="text" id = 'email-' name = 'number'>
+						</section>
+						<!-- 验证码 -->
+						<section class="i5">
+							<span id = 'code_'>验证码&nbsp;&nbsp;*&nbsp;&nbsp;</span>
+							<input type="text" id = 'code' name = 'code'>
+						</section>
+						<!-- 登录密码 -->
+						<section class="i6">
+							<span id = 'password_'>登陆密码&nbsp;&nbsp;*&nbsp;&nbsp;</span>
+							<input type="text" id = 'password' name = 'password'>
+						</section>
+						<!-- 确认登陆密码 -->
+						<section class="i7">
+							<span id = 'password-1'>确认密码&nbsp;&nbsp;*&nbsp;&nbsp;</span>
+							<input type="text" id = 'password-1' name = 'password-1'>
+						</section>
+						<!--  必选项-->
+						<section class = 'i8'>
+							<span id = 'must'>*为必选项</span>
+						</section>
+						<!-- 条款项 -->
+						<section class = 'i9'>	
+							<input type=radio id = 'rad'>
+							<span id = 'read'>我已阅读并同意</span>
+							<span id = 'read-'>《天梭账户注册协议》、《销售条件》、《发货和退货协议》、</span><span id = 'read'>和</span><span id = 'read-'>《隐私和cookie政策》</span>
+						</section>
+						<!-- 注册按钮 -->
+						<section class = 'i10'>
+							<input type="button" value = '注册' id = 'regi'>
+						</section>
+					</div>
+			</nav>
+				
+			</aside>
+		</nav>
+	</div>
+</body>
+</html>
